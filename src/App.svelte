@@ -1,16 +1,16 @@
 <script>
+  import Counter from "./Counter.svelte";
+
   let count = 0;
-  function increment() {
+  function inc() {
     count = count + 1;
   }
-  function decrement() {
+  function dec() {
     count = count - 1;
   }
 </script>
 
-<h1>{count}</h1>
-<button on:click={increment}>Increment +</button>
-<button on:click={decrement}>Decrement -</button>
+<Counter {count} {inc} {dec} />
 
 <style>
 </style>
