@@ -1,18 +1,34 @@
 <script>
-  import { linear } from "svelte/easing";
-  import { fade } from "svelte/transition";
-  let isNotificationVisible = false;
+  import Counter from "./Counter.svelte";
+  import { count, countReadOnly, countDerived } from "./stores/counterstore";
+
+  let selected;
+  $: formFields =
+    selected == "opt1"
+      ? ["email", "password"]
+      : ["username", "mobilenumber", "password"];
 </script>
+
+<select bind:value={selected} name="" id="">
+  <option value="opt1">Opt 1</option>
+  <option value="opt2">Opt 2</option>
+</select>
+
+<form>
+  {#each formFields as formField}
+    <input placeholder={formField} />
+  {/each}
+</form>
 
 <button
   on:click={() => {
-    isNotificationVisible = true;
-  }}>Show notification</button
+    count.update((c) => c + 1);
+  }}
 >
-<p transition:fade class:hidden={!isNotificationVisible}>Hello world</p>
+  Inc</button
+>
+
+<!-- <Counter /> -->
 
 <style>
-  .hidden {
-    display: none;
-  }
 </style>
